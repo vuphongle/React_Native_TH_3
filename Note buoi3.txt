@@ -1,0 +1,10 @@
+https://snack.expo.dev/
+
+row: justify-content --> ngang
+row: align-items --> dọc
+
+picsum: lấy hình ảnh
+
+1. expo.dev
+2. flexbox (RN)
+3. Frog game (flexboxfroggy.com)
