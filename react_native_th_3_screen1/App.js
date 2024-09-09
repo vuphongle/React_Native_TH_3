@@ -1,17 +1,15 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  Alert,
-  StyleSheet,
-} from 'react-native';
+import { Text, View, Image, TouchableOpacity, Alert, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import NewScreen from './NewScreen'; // Đảm bảo đường dẫn chính xác
 
-const YourApp = () => {
+const Stack = createStackNavigator();
+
+const YourApp = ({ navigation }) => {
   // Hàm xử lý sự kiện khi bấm vào nút LOGIN
   const handleLoginPress = () => {
-    Alert.alert('Login Button Pressed!', 'You pressed the login button.');
+    navigation.navigate('NewScreen'); // Chuyển hướng đến màn hình mới
   };
 
   return (
@@ -36,8 +34,8 @@ const YourApp = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        {/* Nút LOGIN không có sự kiện onPress */}
-        <TouchableOpacity style={styles.button}>
+        {/* Nút LOGIN có sự kiện onPress */}
+        <TouchableOpacity style={styles.button} onPress={handleLoginPress}>
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
 
@@ -47,6 +45,17 @@ const YourApp = () => {
         </TouchableOpacity>
       </View>
     </View>
+  );
+};
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={YourApp} options={{headerShown: false}} />
+        <Stack.Screen name="NewScreen" component={NewScreen} options={{headerShown: false}} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
@@ -65,10 +74,10 @@ const styles = StyleSheet.create({
     elevation: 3, // Tạo bóng cho nút
   },
   buttonText: {
-    color: '#000', // Màu chữ trắng
+    color: '#000', // Màu chữ
     fontSize: 16,
     fontWeight: 'bold',
   },
 });
 
-export default YourApp;
+export default App;
